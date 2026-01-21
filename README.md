@@ -1,4 +1,7 @@
 # WhAM: a Whale Acoustics Model
+[![arXiv](https://img.shields.io/badge/arXiv-2512.02206-b31b1b.svg)](https://arxiv.org/abs/2512.02206)
+[![Model Weights](https://img.shields.io/badge/Zenodo-Model%20Weights-blue.svg)](https://doi.org/10.5281/zenodo.17633708)
+[![Hugging Face Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-DSWP%20Dataset-yellow)](https://huggingface.co/datasets/orrp/DSWP)
 ![WhAM](assets/inference.png "WhAM")
 WhAM is a transformer-based audio-to-audio model designed to synthesize and analyze sperm whale codas. Based on [VampNet](https://github.com/hugofloresgarcia/vampnet), WhAM uses masked acoustic token modeling to capture temporal and spectral features of whale communication. WhAM generates codas from a given audio context, enabling three core capabilities:
 
@@ -56,7 +59,7 @@ This will provide you with a Gradio link to test WhAM on inputs of your choice.
 
 ![Training](assets/training.png "Training")
 
-You only need to follow these to fine-tune your own version of WhAM. First, obtain the original vampnet weights by following the instructions in the ![original repo](https://github.com/hugofloresgarcia/vampnet/tree/ismir-2023). Download 
+You only need to follow these to fine-tune your own version of WhAM. First, obtain the original VampNet weights by following the instructions in the ![original repo](https://github.com/hugofloresgarcia/vampnet/tree/ismir-2023). Download 
 c2f.pth and codec.pth and replace the weights you previously downloaded in `vampnet/models`.
 
 Second, obtain data:
@@ -69,8 +72,7 @@ Second, obtain data:
 
     - Finally, download all samples from the [AudioSet Dataset](https://research.google.com/audioset/ontology/index.html) with the label `Animal` and once again save these into the directory
 
-3.  **Species-specific finetuning:**
-    (Forthcoming later in December.)
+3.  **Species-specific finetuning:** Finetuning can be performed on the openly available **[Dominica Sperm Whale Project (DSWP)](https://huggingface.co/datasets/orrp/DSWP)** dataset, available on Hugging Face.
 
 
 With data in hand, navigate into `vampnet` and perform Domain Adaptation:
@@ -116,7 +118,7 @@ After both are finished running, ensure that both resulting weights are copied i
     * `[SPECIES_NAME]` must match the species names found in `wham/generation/prompt_configs.py`.
       
 2.  **Sperm Whale Codas:**
-    (Forthcoming later in December.)
+    To evaluate on sperm whale codas, you can use the openly available [DSWP](https://huggingface.co/datasets/orrp/DSWP) dataset.
 
 3. Generate artifical beeps for experiments. `data/generate_beeps.sh`
 
