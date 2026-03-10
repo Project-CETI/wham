@@ -8,7 +8,7 @@ setup(
     version="0.0.1",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/orrp/wam",
+    url="https://github.com/Project-CETI/wham",
     license="MIT",
     packages=find_packages(),
     package_dir={},
