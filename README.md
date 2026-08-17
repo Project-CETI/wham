@@ -50,7 +50,8 @@ See our [NeurIPS 2025](https://openreview.net/pdf?id=IL1wvzOgqD) publication for
 To run WhAM locally and prompt it in your browser:
 
 ```bash
-python vampnet/app.py --args.load conf/interface.yml --Interface.device cuda
+cd vampnet
+python app.py --args.load conf/interface.yml --Interface.device cuda
 ```
 
 This will provide you with a Gradio link to test WhAM on inputs of your choice.
@@ -59,8 +60,8 @@ This will provide you with a Gradio link to test WhAM on inputs of your choice.
 
 ![Training](assets/training.png "Training")
 
-You only need to follow these to fine-tune your own version of WhAM. First, obtain the original VampNet weights by following the instructions in the ![original repo](https://github.com/hugofloresgarcia/vampnet/tree/ismir-2023). Download 
-c2f.pth and codec.pth and replace the weights you previously downloaded in `vampnet/models`.
+You only need to follow these to fine-tune your own version of WhAM. First, obtain the original VampNet weights by following the instructions in the [original repo](https://github.com/hugofloresgarcia/vampnet/tree/ismir-2023). Download
+`c2f.pth` and `codec.pth` and replace the weights you previously downloaded in `vampnet/models`.
 
 Second, obtain data:
 
@@ -72,39 +73,39 @@ Second, obtain data:
 
     - Finally, download all samples from the [AudioSet Dataset](https://research.google.com/audioset/ontology/index.html) with the label `Animal` and once again save these into the directory
 
-3.  **Species-specific finetuning:** Finetuning can be performed on the openly available **[Dominica Sperm Whale Project (DSWP)](https://huggingface.co/datasets/orrp/DSWP)** dataset, available on Hugging Face.
+2.  **Species-specific finetuning:** Finetuning can be performed on the openly available **[Dominica Sperm Whale Project (DSWP)](https://huggingface.co/datasets/orrp/DSWP)** dataset, available on Hugging Face.
 
 
 With data in hand, navigate into `vampnet` and perform Domain Adaptation:
 ```bash
-python vampnet/scripts/exp/fine_tune.py "training_data/domain_adaptation" domain_adapted && python vampnet/scripts/exp/train.py --args.load conf/generated/domain_adapted/coarse.yml && python vampnet/scripts/exp/train.py --args.load conf/generated/domain_adapted/c2f.yml
+python scripts/exp/fine_tune.py "training_data/domain_adaptation" domain_adapted && python scripts/exp/train.py --args.load conf/generated/domain_adapted/coarse.yml && python scripts/exp/train.py --args.load conf/generated/domain_adapted/c2f.yml
 ```
 
 Then fine-tune the domain-adapted model. Create the config file with the command:
 
 ```bash
-python vampnet/scripts/exp/fine_tune.py "training_data/species_specific_finetuning" fine-tuned
+python scripts/exp/fine_tune.py "training_data/species_specific_finetuning" fine-tuned
 ```
 
-To select which weights you want to use as a checkpoint, change `fine_tune_checkpoint` in `conf/generated/fine-tuned/[c2f/coarse].yml` to `./runs/domain_adaptation/[coarse/c2f]/[checkpoint]/vampnets/weights.pth`. `[checkpoint]` can be `latest` in order to use the last saved checkpoint from the previous run, though it is recommended to manually verify the quality of generations over various checkpoints as overtraining can often cause degradation in audio quality, especially with smaller datasets. After making that change, run the command:
+To select which weights you want to use as a checkpoint, change `fine_tune_checkpoint` in `conf/generated/fine-tuned/[c2f/coarse].yml` to `./runs/domain_adapted/[coarse/c2f]/[checkpoint]/vampnets/weights.pth`. `[checkpoint]` can be `latest` in order to use the last saved checkpoint from the previous run, though it is recommended to manually verify the quality of generations over various checkpoints as overtraining can often cause degradation in audio quality, especially with smaller datasets. After making that change, run the command:
 
 ```bash
-python vampnet/scripts/exp/train.py --args.load conf/generated/fine-tuned/coarse.yml && python vampnet/scripts/exp/train.py --args.load conf/generated/fine-tuned/c2f.yml
+python scripts/exp/train.py --args.load conf/generated/fine-tuned/coarse.yml && python scripts/exp/train.py --args.load conf/generated/fine-tuned/c2f.yml
 ```
 
 After following these steps, you should be able to generate audio via the browser by running:
 ```bash
-python app.py --args.load vampnet/conf/generated/fine-tuned/interface.yml
+python app.py --args.load conf/generated/fine-tuned/interface.yml
 ```
 
 **Note**: The coarse and fine weights can be trained separately if compute allows. In this case, you would call the two scripts:
 
 ```bash
-python vampnet/scripts/exp/train.py --args.load conf/generated/[fine-tuned/domain_adaptated]/coarse.yml
+python scripts/exp/train.py --args.load conf/generated/[fine-tuned/domain_adapted]/coarse.yml
 ```
 
 ```bash
-python vampnet/scripts/exp/train.py --args.load conf/generated/[fine-tuned/domain_adaptated]/c2f.yml
+python scripts/exp/train.py --args.load conf/generated/[fine-tuned/domain_adapted]/c2f.yml
 ```
 
 After both are finished running, ensure that both resulting weights are copied into the same copy of WhAM.
@@ -113,14 +114,14 @@ After both are finished running, ensure that both resulting weights are copied i
 
 ## Testing Data
 
-1.  **Marine Mammel Data:**
+1.  **Marine Mammal Data:**
     Download audio samples from the [WMMS 'Best Of' Cut](https://whoicf2.whoi.edu/science/B/whalesounds/index.cfm). Save them under `data/testing_data/marine_mammals/data/[SPECIES_NAME]`.
     * `[SPECIES_NAME]` must match the species names found in `wham/generation/prompt_configs.py`.
       
 2.  **Sperm Whale Codas:**
     To evaluate on sperm whale codas, you can use the openly available [DSWP](https://huggingface.co/datasets/orrp/DSWP) dataset.
 
-3. Generate artifical beeps for experiments. `data/generate_beeps.sh`
+3. Generate artificial beeps for experiments. `data/generate_beeps.sh`
 
 
 ## Reproducing Paper Results
