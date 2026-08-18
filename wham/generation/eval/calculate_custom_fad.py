@@ -1,7 +1,7 @@
 import os
 import numpy as np
 from scipy.linalg import sqrtm
-from wam import CODA_EMBEDDING_DIR, EVALUATE_EMBEDDING_DIR
+from wham import CODA_EMBEDDING_DIR, EVALUATE_EMBEDDING_DIR
 import argparse
 
 """

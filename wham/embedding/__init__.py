@@ -1,4 +1,4 @@
-from wam import VAMPNET_DIR
+from wham import VAMPNET_DIR
 from pathlib import Path
 
 VAMPNET_MDL_PATH = VAMPNET_DIR / "models"

@@ -1,8 +1,9 @@
 from collections import Counter
 from pathlib import Path
 import pandas as pd
-from wam import VAMPNET_DIR, EMBEDDING_PLOTS_DIR, SNIPPETS_DIR, DENOISED_DATA_DIR, CSV_PATH
-from wam.utils import pathify
+from codatools.codatools import SNIPPETS_DIR
+from wham import VAMPNET_DIR, EMBEDDING_PLOTS_DIR, DENOISED_DATA_DIR, CSV_PATH
+from wham.utils import pathify
 import argparse
 import logging
 from shutil import rmtree

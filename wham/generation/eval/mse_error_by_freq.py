@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import scipy.signal as signal
 from collections import defaultdict
 
-from wam import CODA_DIR, REGEN_CODA_DIR
+from wham import CODA_DIR, REGEN_CODA_DIR
 
 TARGET_SAMPLERATE = 44100
 
