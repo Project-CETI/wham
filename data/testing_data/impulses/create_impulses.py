@@ -3,7 +3,7 @@ import random
 import numpy as np
 from pydub import AudioSegment
 from pydub.generators import Sine
-from wam import IMPULSE_DIR, CODA_DIR
+from wham import IMPULSE_DIR, CODA_DIR
 
 MIN_NUM_CLICKS = 4
 MAX_NUM_CLICKS = 8

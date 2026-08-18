@@ -9,7 +9,7 @@ import os
 from preprocessing import preprocess_audio
 from audiotools import AudioSignal
 from vampnet.interface import Interface
-from wam import VAMPNET_DIR
+from wham import VAMPNET_DIR
 import wandb
 from pathlib import Path
 

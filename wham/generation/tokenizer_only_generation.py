@@ -13,9 +13,9 @@ import argparse
 from vampnet.interface import Interface
 from vampnet import mask as pmask
 from prompt_configs import CONFIGS
-from wam.utils import move_wav_files
+from wham.utils import move_wav_files
 
-from wam import GENERATED_MARINE_PATH_TEMP, MARINE_TEST_DIR, VAMPNET_DIR, REGEN_CODA_DIR
+from wham import GENERATED_MARINE_PATH_TEMP, MARINE_TEST_DIR, VAMPNET_DIR, REGEN_CODA_DIR
 
 import os
 
