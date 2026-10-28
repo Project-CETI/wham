@@ -1,0 +1,5 @@
+.venv/
+work/
+__pycache__/
+**/__pycache__/
+vampnet/models/*.pth

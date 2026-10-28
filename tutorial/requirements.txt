@@ -1,0 +1,11 @@
+huggingface_hub>=0.24
+numpy>=1.23
+pandas>=2.0
+scikit-learn>=1.2
+soundfile>=0.12
+umap-learn>=0.5
+plotly>=5.0
+jupyterlab>=4.0
+
+# The official WhAM extraction path additionally requires the dependencies
+# listed in the repository root setup.py and vampnet/setup.py.
